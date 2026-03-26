@@ -1,7 +1,8 @@
 import { Stack, useRouter, useSegments } from 'expo-router';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { AuthProvider, useAuth } from '../src/context/AuthContext';
 import { View, ActivityIndicator } from 'react-native';
+import { PaperProvider } from 'react-native-paper';
 
 function RootLayoutNav() {
   const { user, loading } = useAuth();
@@ -39,7 +40,9 @@ function RootLayoutNav() {
 export default function RootLayout() {
   return (
     <AuthProvider>
-      <RootLayoutNav />
+      <PaperProvider>
+        <RootLayoutNav />
+      </PaperProvider>
     </AuthProvider>
   );
 }
