@@ -1,8 +1,8 @@
-export interface User {
+export interface UserModel {
   uid: string;
   email: string;
   firstName: string;
   lastName: string;
   phone?: string;
-  createdAt: number;
+  // createdAt: number;
 }
