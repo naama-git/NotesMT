@@ -20,4 +20,11 @@ export const theme = {
     outline: '#CED4DA', // גבולות דקים ואפורים
     surfaceVariant: '#E9ECEF', // רקע אפור לרכיבים משניים (כמו Input)
   },
+  fonts: {
+    ...DefaultTheme.fonts,
+    bodyLarge: {
+      fontFamily: 'Assistant-Regular',
+      fontSize: 16,
+    },
+  },
 };

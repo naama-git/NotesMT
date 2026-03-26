@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { AuthProvider, useAuth } from '../src/context/AuthContext';
 import { View, ActivityIndicator } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
+import { theme } from '@/src/styles/theme';
 
 function RootLayoutNav() {
   const { user, loading } = useAuth();
@@ -40,7 +41,7 @@ function RootLayoutNav() {
 export default function RootLayout() {
   return (
     <AuthProvider>
-      <PaperProvider>
+      <PaperProvider theme={theme}>
         <RootLayoutNav />
       </PaperProvider>
     </AuthProvider>

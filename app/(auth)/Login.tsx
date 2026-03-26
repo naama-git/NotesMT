@@ -1,9 +1,10 @@
 import React from 'react';
+import { Text } from 'react-native-paper';
 
 const Login = () => {
   return (
     <div>
-      <h1>Welcome to LOGIN</h1>
+      <Text>Welcome to LOGIN</Text>
     </div>
   );
 };
