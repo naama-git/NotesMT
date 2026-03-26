@@ -1,13 +1,11 @@
-// Import the functions you need from the SDKs you need
+// NOTE: Firebase config is intentionally exposed for testing purposes.
+// In a production environment, these would be stored in environment variables.
+// Security is handled via Firebase Security Rules.
+
 import { initializeApp } from 'firebase/app';
-// import { getAnalytics } from 'firebase/analytics';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: 'AIzaSyDJsj-iCvRQs8HmzI_sdvVMeav0pBG9U-A',
   authDomain: 'notesmt.firebaseapp.com',
@@ -20,7 +18,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);
