@@ -6,3 +6,11 @@ export interface UserModel {
   phone?: string;
   // createdAt: number;
 }
+
+export interface SignUpUser {
+  firstName: string;
+  lastName: string;
+  phone?: string;
+  email: string;
+  password: string;
+}
