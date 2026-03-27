@@ -5,7 +5,8 @@ import React from 'react';
 const Login = () => {
   const login = async (email: string, password: string) => {
     try {
-      const res = await authService.login(email, password);
+      await authService.login(email, password);
+      console.log('you logged in successfully!');
     } catch (error) {
       console.log(error);
     }

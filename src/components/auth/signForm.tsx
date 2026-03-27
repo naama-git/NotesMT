@@ -1,3 +1,4 @@
+import { UserModel } from '@/src/models/user';
 import React, { useState } from 'react';
 import {
   KeyboardAvoidingView,
@@ -18,21 +19,28 @@ import {
 import { styles } from './styles/login.styles';
 import { useRouter } from 'expo-router';
 
-interface LoginFormProps {
-  onSubmit: (email: string, password: string) => Promise<void>;
+interface SignUPFormProps {
+  onSubmit: (user: UserModel, password: string) => Promise<void>;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
+const SignUPForm: React.FC<SignUPFormProps> = ({ onSubmit }) => {
   const theme = useTheme();
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState<UserModel>({
+    email: '',
+    firstName: '',
+    lastName: '',
+    phone: '',
+  });
+  const [password, setPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
-  const router = useRouter();
-  const onSignUpPress = () => {
-    router.replace('./signup');
+  const updateField = (field: string, value: string) => {
+    setForm({ ...form, [field]: value });
   };
 
-  // const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
+  const onLoginPress = () => {
+    router.replace('./login');
+  };
 
   return (
     <>
@@ -59,13 +67,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
               </Text>
             </Surface>
             <Text variant="headlineMedium" style={styles.mainTitle}>
-              Welcome Back
+              Create Account
             </Text>
             <Text
               variant="bodyMedium"
               style={{ color: theme.colors.onSurfaceVariant }}
             >
-              Enter your details to access your account
+              Fill in your details to get started
             </Text>
           </View>
 
@@ -74,12 +82,37 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
             elevation={1}
           >
             <View style={{ gap: 12 }}>
+              {/* First Name */}
+              <TextInput
+                label="First Name"
+                mode="outlined"
+                value={form.firstName}
+                onChangeText={(val) => updateField('firstName', val)}
+                left={<TextInput.Icon icon="account-outline" />}
+                outlineStyle={{ borderRadius: 12 }}
+                style={styles.inputBackground}
+              />
+
+              {/* Last Name */}
+              <TextInput
+                label="Last Name"
+                mode="outlined"
+                value={form.lastName}
+                onChangeText={(val) => updateField('lastName', val)}
+                left={<TextInput.Icon icon="account-outline" />}
+                outlineStyle={{ borderRadius: 12 }}
+                style={styles.inputBackground}
+              />
+
+              {/* Email */}
               <View>
                 <TextInput
                   label="Email"
                   mode="outlined"
+                  keyboardType="email-address"
+                  autoCapitalize="none"
                   value={form.email}
-                  onChangeText={(val) => setForm({ ...form, email: val })}
+                  onChangeText={(val) => updateField('email', val)}
                   left={<TextInput.Icon icon="email-outline" />}
                   outlineStyle={{ borderRadius: 12 }}
                   style={styles.inputBackground}
@@ -89,43 +122,44 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                 )}
               </View>
 
-              <View>
-                <TextInput
-                  label="Password"
-                  mode="outlined"
-                  secureTextEntry={!showPassword}
-                  value={form.password}
-                  onChangeText={(val) => setForm({ ...form, password: val })}
-                  left={<TextInput.Icon icon="lock-outline" />}
-                  right={
-                    <TextInput.Icon
-                      icon={showPassword ? 'eye-off' : 'eye'}
-                      onPress={() => setShowPassword(!showPassword)}
-                    />
-                  }
-                  outlineStyle={{ borderRadius: 12 }}
-                  style={styles.inputBackground}
-                />
-              </View>
+              {/* Phone */}
+              <TextInput
+                label="Phone Number"
+                mode="outlined"
+                keyboardType="phone-pad"
+                value={form.phone}
+                onChangeText={(val) => updateField('phone', val)}
+                left={<TextInput.Icon icon="phone-outline" />}
+                outlineStyle={{ borderRadius: 12 }}
+                style={styles.inputBackground}
+              />
 
-              <Pressable style={{ alignSelf: 'flex-end' }}>
-                <Text
-                  variant="labelLarge"
-                  style={{ color: theme.colors.primary, fontWeight: '700' }}
-                >
-                  Forgot Password?
-                </Text>
-              </Pressable>
+              {/* Password */}
+              <TextInput
+                label="Password"
+                mode="outlined"
+                secureTextEntry={!showPassword}
+                value={password}
+                onChangeText={(val) => setPassword((val) => val)}
+                left={<TextInput.Icon icon="lock-outline" />}
+                right={
+                  <TextInput.Icon
+                    icon={showPassword ? 'eye-off' : 'eye'}
+                    onPress={() => setShowPassword(!showPassword)}
+                  />
+                }
+                outlineStyle={{ borderRadius: 12 }}
+                style={styles.inputBackground}
+              />
 
               <Button
                 mode="contained"
-                onPress={() => onSubmit(form.email, form.password)}
-                // loading={loading}
+                onPress={() => onSubmit(form, password)}
                 contentStyle={styles.submitBtnContent}
-                style={styles.submitBtn}
+                style={[styles.submitBtn, { marginTop: 10 }]}
                 labelStyle={{ fontSize: 16, fontWeight: 'bold' }}
               >
-                Sign In
+                Sign Up
               </Button>
             </View>
           </Surface>
@@ -139,8 +173,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
           </View>
 
           <View style={styles.footer}>
-            <Text variant="bodyMedium">Don&apos;t have an account?</Text>
-            <Pressable onPress={onSignUpPress}>
+            <Text variant="bodyMedium">Already have an account?</Text>
+            <Pressable onPress={onLoginPress}>
               <Text
                 variant="bodyMedium"
                 style={{
@@ -149,7 +183,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                   marginLeft: 5,
                 }}
               >
-                Sign Up
+                Log In
               </Text>
             </Pressable>
           </View>
@@ -159,4 +193,4 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   );
 };
 
-export default LoginForm;
+export default SignUPForm;
