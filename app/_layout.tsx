@@ -4,6 +4,7 @@ import { AuthProvider, useAuth } from '../src/context/AuthContext';
 import { View, ActivityIndicator } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import { theme } from '@/src/styles/theme';
+import CustomHeader from '@/src/components/home/CustomHeader';
 
 function RootLayoutNav() {
   const { user, loading } = useAuth();
@@ -31,9 +32,21 @@ function RootLayoutNav() {
   }
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="(auth)" />
+    <Stack
+      screenOptions={{
+        headerShown: true,
+        header: () => <CustomHeader />,
+        headerTransparent: true,
+      }}
+    >
       <Stack.Screen name="(tabs)" />
+
+      <Stack.Screen
+        name="(auth)"
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 }

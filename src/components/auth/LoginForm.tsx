@@ -125,7 +125,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                 style={styles.submitBtn}
                 labelStyle={{ fontSize: 16, fontWeight: 'bold' }}
               >
-                Sign In
+                Log In
               </Button>
             </View>
           </Surface>
