@@ -1,7 +1,7 @@
 import { authService } from '@/src/services/authService';
 import React from 'react';
 import { View } from 'react-native';
-import { Button, Icon } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 
 const logout = () => {
   const logout = async () => {
@@ -13,9 +13,12 @@ const logout = () => {
   };
   return (
     <View>
-      <Button onPress={() => logout()}>
-        <Icon source="logout" size={20} />
-      </Button>
+      <IconButton
+        icon="logout"
+        size={24}
+        iconColor="gray"
+        onPress={() => logout()}
+      />
     </View>
   );
 };
