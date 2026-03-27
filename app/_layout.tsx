@@ -16,16 +16,16 @@ function RootLayoutNav() {
     const inAuthGroup = (segments[0] as string) === '(auth)';
 
     if (!user && !inAuthGroup) {
-      router.replace('./(auth)/login');
+      router.replace('/(auth)/login');
     } else if (user && inAuthGroup) {
-      router.replace('./(tabs)');
+      router.replace('/(tabs)');
     }
   }, [user, loading, segments, router]);
 
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" />
       </View>
     );
   }
