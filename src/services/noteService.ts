@@ -4,7 +4,8 @@ import {
   deleteDoc,
   doc,
   getDoc,
-  getDocs,
+  onSnapshot,
+  orderBy,
   query,
   updateDoc,
   where,
@@ -23,19 +24,21 @@ export const noteService = {
     }
   },
 
-  getNotesByUserId: async (userId: string): Promise<Note[]> => {
+  getNotesByUserId: (userId: string, callback: (notes: Note[]) => void) => {
     try {
-      const q = query(collection(db, 'notes'), where('userId', '==', userId));
-      const docs = await getDocs(q);
-      return docs.docs.map(
-        (doc) =>
-          ({
-            id: doc.id,
-            ...doc.data(),
-          }) as Note,
+      const q = query(
+        collection(db, 'notes'),
+        where('userId', '==', userId),
+        orderBy('createdAt', 'desc'),
       );
+      return onSnapshot(q, (snapshot) => {
+        const notes = snapshot.docs.map(
+          (doc) => ({ id: doc.id, ...doc.data() }) as Note,
+        );
+        callback(notes);
+      });
     } catch (error) {
-      console.error('Error geting documents: ', error);
+      console.error('Error fetching documents: ', error);
       throw error;
     }
   },
