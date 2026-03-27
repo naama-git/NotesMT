@@ -16,9 +16,9 @@ function RootLayoutNav() {
     const inAuthGroup = (segments[0] as string) === '(auth)';
 
     if (!user && !inAuthGroup) {
-      router.replace('/(auth)/login');
+      router.replace('/login');
     } else if (user && inAuthGroup) {
-      router.replace('/(tabs)');
+      router.replace('/');
     }
   }, [user, loading, segments, router]);
 

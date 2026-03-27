@@ -39,7 +39,7 @@ const SignUPForm: React.FC<SignUPFormProps> = ({ onSubmit }) => {
 
   const router = useRouter();
   const onLoginPress = () => {
-    router.replace('./login');
+    router.push('/login');
   };
 
   return (

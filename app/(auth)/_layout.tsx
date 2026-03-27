@@ -2,5 +2,33 @@ import { Stack } from 'expo-router';
 import React from 'react';
 
 export default function AuthLayout() {
-  return <Stack></Stack>;
+  return (
+    <Stack
+      screenOptions={{
+        headerStyle: {
+          // backgroundColor: '#6200ee',
+        },
+        // headerTintColor: '#fff', // צבע הטקסט בכותרת
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerShown: true,
+      }}
+    >
+      <Stack.Screen
+        name="login"
+        options={{
+          title: 'Login',
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="signup"
+        options={{
+          title: '',
+        }}
+      />
+    </Stack>
+  );
 }

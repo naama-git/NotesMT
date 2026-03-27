@@ -29,7 +29,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
 
   const router = useRouter();
   const onSignUpPress = () => {
-    router.replace('./signup');
+    router.push('/signup');
   };
 
   // const [loading, setLoading] = useState<boolean>(false);
