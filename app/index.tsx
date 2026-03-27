@@ -1,8 +1,8 @@
-// import { useAuth } from '@/src/context/AuthContext';
-import { Text, View } from 'react-native';
+import Logout from '@/src/components/auth/logout';
+import Welcome from '@/src/components/home/Welcome';
+import { View } from 'react-native';
 
 export default function Index() {
-  // const { user } = useAuth();
   return (
     <View
       style={{
@@ -11,7 +11,8 @@ export default function Index() {
         alignItems: 'center',
       }}
     >
-      <Text>Welcome</Text>
+      <Logout></Logout>
+      <Welcome></Welcome>
     </View>
   );
 }

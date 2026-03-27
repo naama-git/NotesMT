@@ -140,7 +140,7 @@ const SignUPForm: React.FC<SignUPFormProps> = ({ onSubmit }) => {
                 mode="outlined"
                 secureTextEntry={!showPassword}
                 value={password}
-                onChangeText={(val) => setPassword((val) => val)}
+                onChangeText={(val) => setPassword(val)}
                 left={<TextInput.Icon icon="lock-outline" />}
                 right={
                   <TextInput.Icon

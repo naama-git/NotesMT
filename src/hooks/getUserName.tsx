@@ -10,22 +10,44 @@ export const useGetUserName = () => {
   const { user } = useAuth();
 
   useEffect(() => {
+    if (!user?.uid) {
+      setUserName(null);
+      return;
+    }
+    let isMounted = true;
     const loadData = async () => {
       setLoading(true);
+      setErrorMsg(null);
       try {
-        if (user?.uid === undefined) return;
-        const currentUser = await authService.getCurrentUser(user?.uid);
-        setUserName(
-          (currentUser?.firstName ?? '') + (currentUser?.lastName ?? ''),
-        );
+        const currentUser = await authService.getCurrentUser(user.uid);
+
+        if (isMounted) {
+          if (currentUser) {
+            console.log(currentUser);
+            const fullName =
+              `${currentUser.firstName ?? ''} ${currentUser.lastName ?? ''}`.trim();
+            setUserName(fullName || 'User');
+          } else {
+            setUserName('Unknown User');
+          }
+        }
       } catch (error) {
-        console.error('Error loading data ', error);
-        setErrorMsg('Error loading user');
+        if (isMounted) {
+          console.error('Error loading data ', error);
+          setErrorMsg('Error loading user');
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
+
     loadData();
+
+    return () => {
+      isMounted = false;
+    };
   }, [user?.uid]);
   return { userName, errorMsg, loading };
 };
