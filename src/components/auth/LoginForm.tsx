@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
   KeyboardAvoidingView,
@@ -7,16 +8,15 @@ import {
   View,
 } from 'react-native';
 import {
-  TextInput,
   Button,
-  Text,
-  useTheme,
-  Surface,
-  HelperText,
   Divider,
+  HelperText,
+  Surface,
+  Text,
+  TextInput,
+  useTheme,
 } from 'react-native-paper';
-import { styles } from './styles/login.styles';
-import { useRouter } from 'expo-router';
+import { styles } from './styles/auth.styles';
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => Promise<void>;

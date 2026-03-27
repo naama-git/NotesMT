@@ -1,14 +1,10 @@
 import ListView from '@/src/components/note/listView';
-import { useAuth } from '@/src/context/AuthContext';
-import { Note } from '@/src/models/note';
-import { noteService } from '@/src/services/noteService';
-import React, { useEffect, useState } from 'react';
+import { useNotes } from '@/src/hooks/getNotes';
+import React from 'react';
 
 const List = () => {
-  const [notes, setNotes] = useState<Note[]>([]);
-  const { user } = useAuth();
-
-  return <ListView></ListView>;
+  const { notes, loading } = useNotes();
+  return <ListView notes={notes} loading={loading}></ListView>;
 };
 
 export default List;
