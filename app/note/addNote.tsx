@@ -1,3 +1,4 @@
+import NoteForm from '@/src/components/note/noteForm';
 import { Note } from '@/src/models/note';
 import { noteService } from '@/src/services/noteService';
 import React from 'react';
@@ -11,7 +12,11 @@ const AddNote = () => {
       console.log('Error adding note:', error);
     }
   };
-  return <View></View>;
+  return (
+    <View>
+      <NoteForm onSubmit={add} note={null} />
+    </View>
+  );
 };
 
 export default AddNote;

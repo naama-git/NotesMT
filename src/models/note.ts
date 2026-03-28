@@ -10,3 +10,10 @@ export interface Note {
     longitude: number;
   };
 }
+
+export interface NoteInput {
+  title: string;
+  body: string;
+  imageUrl?: string;
+  createdAt?: number;
+}

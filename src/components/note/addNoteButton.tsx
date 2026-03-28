@@ -1,8 +1,10 @@
 import React from 'react';
 import { FAB } from 'react-native-paper';
 import { View } from 'react-native';
+import { useRouter } from 'expo-router';
 
 const AddButton = () => {
+  const router = useRouter();
   return (
     <View style={{ flex: 1 }}>
       <FAB
@@ -13,7 +15,7 @@ const AddButton = () => {
           bottom: 0,
           right: 0,
         }}
-        onPress={() => console.log('Pressed')}
+        onPress={() => router.push('/note/addNote')}
       />
     </View>
   );
