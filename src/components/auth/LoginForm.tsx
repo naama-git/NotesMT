@@ -108,15 +108,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
                 />
               </View>
 
-              <Pressable style={{ alignSelf: 'flex-end' }}>
-                <Text
-                  variant="labelLarge"
-                  style={{ color: theme.colors.primary, fontWeight: '700' }}
-                >
-                  Forgot Password?
-                </Text>
-              </Pressable>
-
               <Button
                 mode="contained"
                 onPress={() => onSubmit(form.email, form.password)}

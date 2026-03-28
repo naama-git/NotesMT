@@ -29,7 +29,7 @@ export const noteService = {
       const q = query(
         collection(db, 'notes'),
         where('userId', '==', userId),
-        orderBy('createdAt', 'desc'),
+        // orderBy('createdAt', 'desc'),
       );
       return onSnapshot(q, (snapshot) => {
         const notes = snapshot.docs.map(

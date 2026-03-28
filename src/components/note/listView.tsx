@@ -19,7 +19,12 @@ const ListView: React.FC<ListViewProps> = ({ notes, loading }) => {
       );
     return <View>my Notes</View>;
   };
-  return <View>{renderContent()}</View>;
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>List View</Text>
+      {renderContent()}
+    </View>
+  );
 };
 
 export default ListView;
