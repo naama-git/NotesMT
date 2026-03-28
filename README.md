@@ -48,3 +48,36 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+```
+/
+├── app/                        # Expo Router: Routing & Screen Orchestration
+│   │                           # Contains logic for data fetching and navigation only.
+│   ├── (auth)/                 # Authentication Flow (Stack)
+│   │   ├── _layout.tsx         # Auth guard and stack configuration
+│   │   ├── login.tsx           # Login screen - Connects UI to AuthService
+│   │   └── signup.tsx          # Signup screen - Handles multi-step registration
+│   ├── (tabs)/                 # Main Application Flow (Bottom Tabs)
+│   │   ├── _layout.tsx         # Tab bar configuration & Icon definitions
+│   │   ├── index.tsx           # Map Screen - Primary view for note locations
+│   │   ├── list.tsx            # Notes List - Overview of all user entries
+│   │   └── profile.tsx         # User Profile & Settings
+│   ├── note/                   # Dynamic Route Group for Note actions
+│   │   ├── [id].tsx            # View/Edit specific note details
+│   │   └── addNote.tsx         # New note creation screen
+│   └── _layout.tsx             # Root Layout - Global Providers (Auth, Paper, Context)
+│
+├── src/                        # Core Application Source Code
+│   ├── components/             # Reusable UI Components (Presentational)
+│   │                           # Atomic elements: AuthForm, CustomButton, NoteCard, etc.
+│   ├── context/                # Global State Management
+│   │                           # AuthContext: Maintains real-time user session state.
+│   ├── hooks/                  # Custom React Hooks (Reusable Logic)
+│   │                           # useNotes: Abstraction for Firebase real-time listeners.
+│   ├── services/               # Infrastructure Layer (External API/SDK)
+│   │                           # Firebase SDK wrappers: AuthService, NoteService.
+│   ├── models/                 # TypeScript Types & Interfaces
+│   │                           # Defines data structures: User, Note, Location.
+│   └── styles/                 # Theme & Visual Configuration
+│                               # RN Paper theme, global colors, and typography.
+```
