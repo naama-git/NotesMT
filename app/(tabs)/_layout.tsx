@@ -1,4 +1,3 @@
-// import CustomHeader from '@/src/components/home/CustomHeader';
 import { Tabs } from 'expo-router';
 
 import React from 'react';
@@ -8,10 +7,13 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
+        tabBarStyle: {
+          height: 70,
+        },
       }}
     >
-      <Tabs.Screen name="index"></Tabs.Screen>
-      <Tabs.Screen name="list"></Tabs.Screen>
+      <Tabs.Screen name="index" options={{ title: 'map' }}></Tabs.Screen>
+      <Tabs.Screen name="list" options={{ title: 'list' }}></Tabs.Screen>
     </Tabs>
   );
 }

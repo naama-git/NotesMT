@@ -18,42 +18,43 @@ function RootLayoutNav() {
 
     if (!user && !inAuthGroup) {
       router.replace('/login');
-    } else if (user && inAuthGroup) {
+    } else if (user && !inAuthGroup) {
       router.replace('/(tabs)');
     }
   }, [user, loading, segments, router]);
 
-  if (loading) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
-
   return (
-    <Stack
-      screenOptions={{
-        headerShown: true,
-        header: () => <CustomHeader />,
-        headerTransparent: true,
-      }}
-    >
-      <Stack.Screen
-        name="(tabs)"
-        options={{
+    <View style={{ flex: 1 }}>
+      <Stack
+        screenOptions={{
           headerShown: true,
           header: () => <CustomHeader />,
+          headerTransparent: true,
         }}
-      />
+      >
+        <Stack.Screen
+          name="(tabs)"
+          options={{
+            headerShown: true,
+            header: () => <CustomHeader />,
+          }}
+        />
 
-      <Stack.Screen
-        name="(auth)"
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Stack>
+        <Stack.Screen
+          name="(auth)"
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack>
+      {loading && (
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <ActivityIndicator size="large" />
+        </View>
+      )}
+    </View>
   );
 }
 
