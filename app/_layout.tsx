@@ -19,7 +19,7 @@ function RootLayoutNav() {
     if (!user && !inAuthGroup) {
       router.replace('/login');
     } else if (user && inAuthGroup) {
-      router.replace('/');
+      router.replace('/(tabs)');
     }
   }, [user, loading, segments, router]);
 
@@ -39,7 +39,13 @@ function RootLayoutNav() {
         headerTransparent: true,
       }}
     >
-      <Stack.Screen name="(tabs)" />
+      <Stack.Screen
+        name="(tabs)"
+        options={{
+          headerShown: true,
+          header: () => <CustomHeader />,
+        }}
+      />
 
       <Stack.Screen
         name="(auth)"
