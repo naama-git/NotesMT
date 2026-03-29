@@ -5,7 +5,6 @@ import {
   doc,
   getDoc,
   onSnapshot,
-  orderBy,
   query,
   updateDoc,
   where,
@@ -26,11 +25,7 @@ export const noteService = {
 
   getNotesByUserId: (userId: string, callback: (notes: Note[]) => void) => {
     try {
-      const q = query(
-        collection(db, 'notes'),
-        where('userId', '==', userId),
-        // orderBy('createdAt', 'desc'),
-      );
+      const q = query(collection(db, 'notes'), where('userId', '==', userId));
       return onSnapshot(q, (snapshot) => {
         const notes = snapshot.docs.map(
           (doc) => ({ id: doc.id, ...doc.data() }) as Note,

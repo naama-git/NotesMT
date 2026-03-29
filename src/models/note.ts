@@ -15,5 +15,5 @@ export interface NoteInput {
   title: string;
   body: string;
   imageUrl?: string;
-  createdAt: string;
+  createdAt: Date;
 }

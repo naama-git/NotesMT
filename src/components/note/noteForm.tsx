@@ -14,21 +14,23 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
   const theme = useTheme();
   const [form, setForm] = useState<NoteInput>({
     title: note?.title ? note?.title : '',
-    createdAt: note
-      ? new Date(note?.createdAt).toLocaleDateString('he-IL')
-      : new Date().toLocaleDateString('he-IL'),
+    createdAt: note ? new Date(note.createdAt) : new Date(),
     body: note?.body ?? '',
   });
 
   useEffect(() => {
     setForm({
       title: note?.title ? note?.title : '',
-      createdAt: note
-        ? new Date(note?.createdAt).toLocaleDateString('he-IL')
-        : new Date().toLocaleDateString('he-IL'),
+      createdAt: note ? new Date(note.createdAt) : new Date(),
       body: note?.body ?? '',
     });
   }, [note]);
+
+  const [dateText, setDateText] = useState(
+    form.createdAt instanceof Date
+      ? form.createdAt.toLocaleDateString('he-IL')
+      : '',
+  );
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -69,12 +71,26 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
               <TextInput
                 label="Date"
                 mode="outlined"
-                value={form.createdAt}
-                onChangeText={(val) => setForm({ ...form, createdAt: val })}
+                value={dateText}
+                onChangeText={(val) => {
+                  setDateText(val);
+
+                  if (val.length >= 9) {
+                    const [day, month, year] = val.split('.').map(Number);
+                    const newDate = new Date(year, month - 1, day);
+                    if (!isNaN(newDate.getTime())) {
+                      setForm({ ...form, createdAt: newDate });
+                    } else {
+                      setForm({ ...form, createdAt: new Date() });
+                    }
+                  }
+                }}
                 left={<TextInput.Icon icon="calendar-outline" />}
                 outlineStyle={{ borderRadius: 12 }}
                 style={styles.inputBackground}
                 placeholder="DD/MM/YYYY"
+                maxLength={10}
+                keyboardType="numeric"
               />
               <TextInput
                 label="Content"
@@ -83,7 +99,7 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
                 onChangeText={(val) => setForm({ ...form, body: val })}
                 multiline
                 numberOfLines={5}
-                left={<TextInput.Icon icon="text-subject" />}
+                left={<TextInput.Icon icon="text-box-outline" />}
                 outlineStyle={{ borderRadius: 12 }}
                 style={[styles.inputBackground, { minHeight: 120 }]}
               />

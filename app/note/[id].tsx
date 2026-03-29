@@ -1,8 +1,9 @@
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Note, NoteInput } from '@/src/models/note';
 import { noteService } from '@/src/services/noteService';
 import React, { useEffect } from 'react';
 import NoteForm from '@/src/components/note/noteForm';
+import { useRoutePath } from '@react-navigation/native';
 
 const EditNote = () => {
   const { id } = useLocalSearchParams();
@@ -27,16 +28,19 @@ const EditNote = () => {
     const noteDetails: Partial<Note> = {
       title: noteData.title,
       body: noteData.body,
-      createdAt: new Date(noteData.createdAt).getTime(),
+      createdAt: noteData.createdAt.getTime(),
     };
     return noteDetails;
   };
+
+  const router = useRouter();
 
   const update = async (noteData: NoteInput) => {
     const noteDetails = createNoteDetails(noteData);
     if (!note || note.id === undefined) return;
     try {
       await noteService.updateNote(note.id, noteDetails);
+      router.back();
     } catch (error) {
       console.log('Error editing note:', error);
     }

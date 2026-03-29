@@ -25,5 +25,9 @@ export const theme = {
       fontFamily: 'Assistant-Regular',
       fontSize: 16,
     },
+    labelLarge: {
+      fontFamily: 'Assistant-Regular',
+      fontSize: 14,
+    },
   },
 };
