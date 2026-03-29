@@ -1,8 +1,13 @@
-// import React from 'react';
-// import { View } from 'react-native';
+import { Stack } from 'expo-router';
+import React from 'react';
 
-// const _layout = () => {
-//   return <View></View>;
-// };
+const _layout = () => {
+  return (
+    <Stack screenOptions={{ title: '' }}>
+      <Stack.Screen name="addNote" />
+      <Stack.Screen name="[id]" />
+    </Stack>
+  );
+};
 
-// export default _layout;
+export default _layout;

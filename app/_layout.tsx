@@ -46,7 +46,15 @@ function RootLayoutNav() {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="note"
+          options={{
+            headerShown: false,
+            presentation: 'modal',
+          }}
+        />
       </Stack>
+
       {loading && (
         <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}

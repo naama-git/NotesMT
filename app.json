@@ -4,10 +4,8 @@
     "slug": "NotesMT",
     "version": "1.0.0",
     "orientation": "portrait",
-    // "icon": "./assets/images/icon.png",
     "scheme": "notesmt",
     "userInterfaceStyle": "automatic",
-    // "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
       "config": {
@@ -26,8 +24,7 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "output": "static",
-      // "favicon": "./assets/images/favicon.png"
+      "output": "static"
     },
     "plugins": [
       "expo-router",
@@ -42,7 +39,8 @@
             "backgroundColor": "#000000"
           }
         }
-      ]
+      ],
+      "@react-native-community/datetimepicker"
     ],
     "experiments": {
       "typedRoutes": true,
