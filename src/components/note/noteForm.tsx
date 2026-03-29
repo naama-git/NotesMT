@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { styles } from './styles/form.styles';
 import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { Button, Surface, useTheme, TextInput, Text } from 'react-native-paper';
+import DeleteNote from './deleteNote';
 
 interface NoteFormProps {
   onSubmit: (note: NoteInput) => Promise<void>;
@@ -76,15 +77,24 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
                 outlineStyle={{ borderRadius: 12 }}
                 style={[styles.inputBackground, { minHeight: 120 }]}
               />
-              <Button
-                mode="contained"
-                onPress={() => onSubmit(form)}
-                contentStyle={styles.submitBtnContent}
-                style={[styles.submitBtn, { marginTop: 8 }]}
-                labelStyle={{ fontSize: 16, fontWeight: 'bold' }}
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
               >
-                Save Note
-              </Button>
+                <DeleteNote note={note} />
+                <Button
+                  mode="contained"
+                  onPress={() => onSubmit(form)}
+                  contentStyle={styles.submitBtnContent}
+                  style={[styles.submitBtn, { marginTop: 8 }]}
+                  labelStyle={{ fontSize: 16, fontWeight: 'bold' }}
+                >
+                  Save Note
+                </Button>
+              </View>
             </View>
           </Surface>
         </ScrollView>

@@ -2,7 +2,8 @@ import { Note } from '@/src/models/note';
 import { noteService } from '@/src/services/noteService';
 import React from 'react';
 import { View } from 'react-native';
-import { IconButton } from 'react-native-paper';
+import { Button } from 'react-native-paper';
+import { styles } from './styles/form.styles';
 
 interface DeleteNoteProps {
   note: Note | null;
@@ -19,7 +20,18 @@ const DeleteNote: React.FC<DeleteNoteProps> = ({ note }) => {
   };
   return (
     <View>
-      {note && <IconButton icon="delete" size={20} onPress={onDelete} />}
+      {note && (
+        <Button
+          icon="delete"
+          mode="contained"
+          onPress={() => onDelete()}
+          contentStyle={styles.submitBtnContent}
+          style={[styles.submitBtn, { marginTop: 8 }]}
+          labelStyle={{ fontSize: 16, fontWeight: 'bold' }}
+        >
+          Delete
+        </Button>
+      )}
     </View>
   );
 };
