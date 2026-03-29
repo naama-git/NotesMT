@@ -1,4 +1,11 @@
-import { MD3LightTheme as DefaultTheme } from 'react-native-paper';
+import {
+  configureFonts,
+  MD3LightTheme as DefaultTheme,
+} from 'react-native-paper';
+
+const fontConfig = {
+  fontFamily: 'Assistant-Regular',
+};
 
 export const theme = {
   ...DefaultTheme,
@@ -20,15 +27,5 @@ export const theme = {
     surfaceVariant: '#E9ECEF',
     focus: '#ADB5BD',
   },
-  fonts: {
-    ...DefaultTheme.fonts,
-    bodyLarge: {
-      fontFamily: 'Assistant-Regular',
-      fontSize: 16,
-    },
-    labelLarge: {
-      fontFamily: 'Assistant-Regular',
-      fontSize: 14,
-    },
-  },
+  fonts: configureFonts({ config: fontConfig }),
 };
