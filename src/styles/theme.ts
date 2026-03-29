@@ -18,6 +18,7 @@ export const theme = {
     onSurfaceVariant: '#6C757D',
     outline: '#CED4DA',
     surfaceVariant: '#E9ECEF',
+    focus: '#ADB5BD',
   },
   fonts: {
     ...DefaultTheme.fonts,

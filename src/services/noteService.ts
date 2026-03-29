@@ -30,7 +30,8 @@ export const noteService = {
         const notes = snapshot.docs.map(
           (doc) => ({ id: doc.id, ...doc.data() }) as Note,
         );
-        callback(notes);
+        const sortedNotes = notes.sort((a, b) => b.createdAt - a.createdAt);
+        callback(sortedNotes);
       });
     } catch (error) {
       console.error('Error fetching documents: ', error);

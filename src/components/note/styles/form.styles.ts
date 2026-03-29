@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
   },
   mainTitle: {
-    fontWeight: '800',
+    // fontWeight: '800',
     letterSpacing: -0.5,
   },
   formCard: {

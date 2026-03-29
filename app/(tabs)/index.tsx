@@ -1,8 +1,8 @@
-import MapView from '@/src/components/note/mapView';
 import { useNotes } from '@/src/hooks/getNotes';
 import React from 'react';
 import { Text } from 'react-native-paper';
 import { View } from 'react-native';
+import MapViewScene from '@/src/components/note/mapView';
 
 const Index = () => {
   const { notes, loading } = useNotes();
@@ -14,8 +14,7 @@ const Index = () => {
         alignItems: 'center',
       }}
     >
-      {/* <MapView notes={notes} loading={loading} /> */}
-      <Text>Map View</Text>
+      <MapViewScene notes={notes} loading={loading} />
     </View>
   );
 };

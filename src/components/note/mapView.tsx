@@ -1,7 +1,7 @@
 import { Note } from '@/src/models/note';
 import React from 'react';
 import { Text } from 'react-native-paper';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import { StyleSheet, View, Dimensions, Platform } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
 interface MapViewProps {
@@ -13,7 +13,13 @@ const MapViewScene: React.FC<MapViewProps> = ({ notes, loading }) => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Map View</Text>
-      <MapView
+      {Platform.OS === 'web' && (
+        <Text style={{ color: 'red', marginBottom: 10 }}>
+          Map view is not supported on web platform.
+        </Text>
+      )}
+
+      {/* <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.map}
         initialRegion={{
@@ -28,7 +34,7 @@ const MapViewScene: React.FC<MapViewProps> = ({ notes, loading }) => {
           title="selected note"
           description="this is the selected note"
         />
-      </MapView>
+      </MapView> */}
     </View>
   );
 };
