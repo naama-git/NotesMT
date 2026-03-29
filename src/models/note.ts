@@ -1,5 +1,5 @@
 export interface Note {
-  id: string;
+  id?: string;
   title: string;
   body: string;
   createdAt: number;
@@ -15,5 +15,5 @@ export interface NoteInput {
   title: string;
   body: string;
   imageUrl?: string;
-  createdAt?: number;
+  createdAt: string;
 }
