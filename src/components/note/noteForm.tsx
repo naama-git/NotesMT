@@ -14,18 +14,18 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
   const theme = useTheme();
   const [form, setForm] = useState<NoteInput>({
     title: note?.title ? note?.title : '',
-    createdAt:
-      note?.createdAt.toLocaleString('he-IL') ??
-      new Date().toLocaleDateString('he-IL'),
+    createdAt: note
+      ? new Date(note?.createdAt).toLocaleDateString('he-IL')
+      : new Date().toLocaleDateString('he-IL'),
     body: note?.body ?? '',
   });
 
   useEffect(() => {
     setForm({
       title: note?.title ? note?.title : '',
-      createdAt:
-        note?.createdAt.toLocaleString('he-IL') ??
-        new Date().toLocaleDateString('he-IL'),
+      createdAt: note
+        ? new Date(note?.createdAt).toLocaleDateString('he-IL')
+        : new Date().toLocaleDateString('he-IL'),
       body: note?.body ?? '',
     });
   }, [note]);

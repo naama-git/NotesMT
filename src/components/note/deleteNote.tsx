@@ -4,16 +4,19 @@ import React from 'react';
 import { View } from 'react-native';
 import { Button } from 'react-native-paper';
 import { styles } from './styles/form.styles';
+import { useRouter } from 'expo-router';
 
 interface DeleteNoteProps {
   note: Note | null;
 }
 
 const DeleteNote: React.FC<DeleteNoteProps> = ({ note }) => {
+  const router = useRouter();
   const onDelete = async () => {
     if (!note || !note.id) return;
     try {
       await noteService.deleteNote(note.id);
+      router.back();
     } catch (error) {
       console.log('Error deleting note:', error);
     }
