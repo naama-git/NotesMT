@@ -1,5 +1,5 @@
 import { Note, NoteInput } from '@/src/models/note';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styles } from './styles/form.styles';
 import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { Button, Surface, useTheme, TextInput, Text } from 'react-native-paper';
@@ -13,12 +13,22 @@ interface NoteFormProps {
 const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
   const theme = useTheme();
   const [form, setForm] = useState<NoteInput>({
-    title: note?.title ?? '',
+    title: note?.title ? note?.title : '',
     createdAt:
       note?.createdAt.toLocaleString('he-IL') ??
       new Date().toLocaleDateString('he-IL'),
     body: note?.body ?? '',
   });
+
+  useEffect(() => {
+    setForm({
+      title: note?.title ? note?.title : '',
+      createdAt:
+        note?.createdAt.toLocaleString('he-IL') ??
+        new Date().toLocaleDateString('he-IL'),
+      body: note?.body ?? '',
+    });
+  }, [note]);
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

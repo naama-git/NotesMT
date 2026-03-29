@@ -22,7 +22,7 @@ const ListView: React.FC<ListViewProps> = ({ notes, loading }) => {
     return (
       <ScrollView
         contentContainerStyle={{
-          paddingBottom: 20,
+          marginBottom: 20,
           width: '100%',
           marginTop: 20,
           flex: 1,

@@ -1,4 +1,5 @@
 import { Note } from '@/src/models/note';
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { Dimensions, View } from 'react-native';
 import {
@@ -17,9 +18,13 @@ interface OneNoteProps {
 const OneNote: React.FC<OneNoteProps> = ({ note, key }) => {
   const theme = useTheme();
   const { width: screenWidth } = Dimensions.get('window');
+  const router = useRouter();
   return (
     <View>
       <Card
+        onPress={() => {
+          router.push(`/note/${note.id}`);
+        }}
         style={{
           width: screenWidth * 0.92,
           borderRadius: 20,
