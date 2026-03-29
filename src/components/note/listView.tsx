@@ -1,7 +1,9 @@
 import { Note } from '@/src/models/note';
 import React from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { ActivityIndicator, Text } from 'react-native-paper';
+import OneNote from './oneNote';
+// import { ScrollView } from 'react-native-reanimated/lib/typescript/Animated';
 
 interface ListViewProps {
   notes: Note[];
@@ -18,14 +20,21 @@ const ListView: React.FC<ListViewProps> = ({ notes, loading }) => {
         </View>
       );
     return (
-      <View>
-        my Notes
+      <ScrollView
+        contentContainerStyle={{
+          paddingBottom: 20,
+          width: '100%',
+          marginTop: 20,
+          flex: 1,
+          alignItems: 'center',
+          gap: 16,
+        }}
+        showsVerticalScrollIndicator={false}
+      >
         {notes.map((note) => (
-          <View key={note.id}>
-            <Text>{note.title}</Text>
-          </View>
+          <OneNote key={note.id} note={note} />
         ))}
-      </View>
+      </ScrollView>
     );
   };
   return (
