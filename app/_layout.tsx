@@ -25,13 +25,7 @@ function RootLayoutNav() {
 
   return (
     <View style={{ flex: 1 }}>
-      <Stack
-      // screenOptions={{
-      //   headerShown: true,
-      //   header: () => <CustomHeader />,
-      //   headerTransparent: true,
-      // }}
-      >
+      <Stack>
         <Stack.Screen
           name="(tabs)"
           options={{

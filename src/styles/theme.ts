@@ -4,7 +4,7 @@ import {
 } from 'react-native-paper';
 
 const fontConfig = {
-  fontFamily: 'Assistant-Regular',
+  fontFamily: 'Fredoka-VariableFont_wdth,wght.ttf',
 };
 
 export const theme = {
