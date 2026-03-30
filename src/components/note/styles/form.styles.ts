@@ -1,3 +1,4 @@
+import { theme } from '@/src/styles/theme';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -21,6 +22,7 @@ export const styles = StyleSheet.create({
   mainTitle: {
     // fontWeight: '800',
     letterSpacing: -0.5,
+    color: theme.colors.primary,
   },
   formCard: {
     padding: 24,

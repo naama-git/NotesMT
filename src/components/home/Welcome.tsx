@@ -1,4 +1,5 @@
 import { useGetUserName } from '@/src/hooks/getUserName';
+import { theme } from '@/src/styles/theme';
 import React from 'react';
 import { View } from 'react-native';
 import { ActivityIndicator, Text } from 'react-native-paper';
@@ -9,7 +10,9 @@ const Welcome = () => {
     <ActivityIndicator animating={true} />
   ) : (
     <View>
-      <Text>Welcome, {userName}</Text>
+      <Text style={{ color: theme.colors.primary, fontWeight: 'bold' }}>
+        Welcome, {userName}
+      </Text>
     </View>
   );
 };
