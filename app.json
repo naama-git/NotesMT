@@ -27,6 +27,14 @@
       "output": "static"
     },
     "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ],
       "expo-router",
       [
         "expo-splash-screen",
@@ -38,13 +46,15 @@
       ],
       "@react-native-community/datetimepicker",
       "expo-asset",
-       [
+      [
         "expo-font",
         {
           "fonts": [
-            "./assets/fonts/Fredoka-VariableFont_wdth.ttf",
+            "./assets/fonts/Fredoka-VariableFont_wdth.ttf"
           ]
-        }]
+        }
+      ],
+      "expo-build-properties"
     ],
     "experiments": {
       "typedRoutes": true,

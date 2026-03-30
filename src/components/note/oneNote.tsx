@@ -26,16 +26,16 @@ const OneNote: React.FC<OneNoteProps> = ({ note, key }) => {
           router.push(`/note/${note.id}`);
         }}
         style={{
-          width: screenWidth * 0.92,
+          width: screenWidth * 0.85,
           borderRadius: 20,
           backgroundColor: theme.colors.surface,
         }}
-        elevation={1}
+        elevation={3}
       >
         <Card.Title
           title={note.title}
           titleStyle={{
-            fontWeight: '700',
+            fontWeight: '500',
             fontSize: 18,
             color: theme.colors.primary,
           }}

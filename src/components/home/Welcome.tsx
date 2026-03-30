@@ -1,5 +1,6 @@
 import { useGetUserName } from '@/src/hooks/getUserName';
 import React from 'react';
+import { View } from 'react-native';
 import { ActivityIndicator, Text } from 'react-native-paper';
 
 const Welcome = () => {
@@ -7,9 +8,9 @@ const Welcome = () => {
   return loading ? (
     <ActivityIndicator animating={true} />
   ) : (
-    <div>
+    <View>
       <Text>Welcome, {userName}</Text>
-    </div>
+    </View>
   );
 };
 
