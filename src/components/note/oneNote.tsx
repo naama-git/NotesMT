@@ -1,6 +1,6 @@
 import { Note } from '@/src/models/note';
 import { useRouter } from 'expo-router';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Dimensions, View } from 'react-native';
 import {
   Avatar,
@@ -10,43 +10,42 @@ import {
   Text,
   IconButton,
 } from 'react-native-paper';
+import { getStyles } from '@/src/components/note/styles/oneNote.styles'; // וודא שהנתיב נכון
 
 interface OneNoteProps {
   note: Note;
-  key: string | undefined;
 }
-const OneNote: React.FC<OneNoteProps> = ({ note, key }) => {
+
+const OneNote: React.FC<OneNoteProps> = ({ note }) => {
   const theme = useTheme();
   const { width: screenWidth } = Dimensions.get('window');
   const router = useRouter();
+
+  const styles = useMemo(
+    () => getStyles(theme, screenWidth),
+    [theme, screenWidth],
+  );
+
   return (
     <View>
       <Card
         onPress={() => {
           router.push(`/note/${note.id}`);
         }}
-        style={{
-          width: screenWidth * 0.85,
-          borderRadius: 20,
-          backgroundColor: theme.colors.surface,
-        }}
+        style={styles.card}
         elevation={3}
       >
         <Card.Title
           title={note.title}
-          titleStyle={{
-            fontWeight: '500',
-            fontSize: 18,
-            color: theme.colors.primary,
-          }}
+          titleStyle={styles.title}
           subtitle={new Date(note.createdAt).toLocaleDateString('he-IL')}
-          subtitleStyle={{ color: theme.colors.onSurfaceVariant }}
+          subtitleStyle={styles.subtitle}
           left={(props) => (
             <Avatar.Icon
               {...props}
               icon="note-text-outline"
               size={40}
-              style={{ backgroundColor: theme.colors.primaryContainer }}
+              style={styles.avatarIcon}
               color={theme.colors.onPrimaryContainer}
             />
           )}
@@ -54,35 +53,17 @@ const OneNote: React.FC<OneNoteProps> = ({ note, key }) => {
 
         <Divider />
 
-        <Card.Content style={{ marginTop: 12 }}>
-          <Text
-            variant="bodyMedium"
-            numberOfLines={3}
-            style={{
-              lineHeight: 20,
-              color: theme.colors.onSurface,
-              marginBottom: 12,
-            }}
-          >
+        <Card.Content style={styles.content}>
+          <Text variant="bodyMedium" numberOfLines={3} style={styles.bodyText}>
             {note.body}
           </Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              backgroundColor: theme.colors.surfaceVariant,
-              alignSelf: 'flex-start',
-              paddingHorizontal: 8,
-              paddingVertical: 4,
-              borderRadius: 8,
-            }}
-          >
+          <View style={styles.locationBadge}>
             <IconButton
               icon="map-marker-radius"
               size={14}
-              style={{ margin: 0, padding: 0 }}
+              style={styles.locationIcon}
             />
-            <Text variant="labelSmall" style={{ fontWeight: '600' }}>
+            <Text variant="labelSmall" style={styles.locationText}>
               {note.location.latitude.toFixed(4)},{' '}
               {note.location.longitude.toFixed(4)}
             </Text>

@@ -3,7 +3,6 @@ import React from 'react';
 import { View, ScrollView } from 'react-native';
 import { ActivityIndicator, Text } from 'react-native-paper';
 import OneNote from './oneNote';
-// import { ScrollView } from 'react-native-reanimated/lib/typescript/Animated';
 
 interface ListViewProps {
   notes: Note[];
