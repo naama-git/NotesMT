@@ -9,8 +9,8 @@ import {
   updateDoc,
   where,
 } from 'firebase/firestore';
+import { db } from '../config/firebaseConfig';
 import { Note } from './../models/note';
-import { db } from './firebaseConfig';
 
 export const noteService = {
   addNote: async (note: Note) => {

@@ -1,6 +1,5 @@
 import { useNotes } from '@/src/hooks/getNotes';
 import React from 'react';
-import { Text } from 'react-native-paper';
 import { View } from 'react-native';
 import MapViewScene from '@/src/components/note/mapView';
 

@@ -3,9 +3,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { UserModel } from '../models/user';
-import { auth, db } from './firebaseConfig';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { auth, db } from '../config/firebaseConfig';
+import { UserModel } from '../models/user';
 
 export const authService = {
   signUp: async (password: string, userData: UserModel) => {
