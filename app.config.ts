@@ -1,4 +1,6 @@
 import 'dotenv/config';
+
+console.log('ENV TEST:', process.env.EXPO_PUBLIC_GOOGLE_MAPS_WEB_KEY);
 export default {
   expo: {
     name: 'NotesMT',
@@ -63,6 +65,9 @@ export default {
     experiments: {
       typedRoutes: true,
       reactCompiler: true,
+    },
+    extra: {
+      googleMapsApiKeyWeb: process.env.EXPO_PUBLIC_GOOGLE_MAPS_WEB_KEY,
     },
   },
 };

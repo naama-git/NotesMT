@@ -12,12 +12,13 @@ interface MapViewSceneProps {
 }
 const MapViewScene: React.FC<MapViewSceneProps> = ({ notes, loading }) => {
   console.log('api', process.env.EXPO_PUBLIC_GOOGLE_MAPS_WEB_KEY);
+  const googleMapsKey = process.env.EXPO_PUBLIC_GOOGLE_MAPS_WEB_KEY || '';
 
   const { location } = useLocation();
   const router = useRouter();
   const { isLoaded, loadError } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_WEB_KEY || '',
+    googleMapsApiKey: googleMapsKey,
   });
 
   if (loadError) {
@@ -28,8 +29,8 @@ const MapViewScene: React.FC<MapViewSceneProps> = ({ notes, loading }) => {
     );
   }
   return (
-    <View style={{ flex: 1 }}>
-      {isLoaded || loading ? (
+    <View style={{ flex: 1, height: '100%', width: '100%' }}>
+      {!isLoaded || loading ? (
         <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
@@ -42,16 +43,16 @@ const MapViewScene: React.FC<MapViewSceneProps> = ({ notes, loading }) => {
             lat: location ? location.coords.latitude : 32.0853,
             lng: location ? location.coords.longitude : 34.7818,
           }}
-          zoom={10}
+          zoom={12}
         >
           {notes.map((note) => (
             <Marker
-              onClick={() => router.push(`/note/${note.id}`)}
               key={note.id}
               position={{
                 lat: note.location.latitude,
                 lng: note.location.longitude,
               }}
+              onClick={() => router.push(`/note/${note.id}`)}
               title={note.title}
             />
           ))}
