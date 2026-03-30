@@ -25,6 +25,7 @@
     },
     "web": {
       "output": "static"
+      
     },
     "plugins": [
       [
