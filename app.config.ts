@@ -12,14 +12,14 @@ export default {
     ios: {
       supportsTablet: true,
       config: {
-        googleMapsApiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_MOBILE_KEY,
+        googleMapsApiKey: process.env.GOOGLE_MAPS_MOBILE_KEY,
       },
       bundleIdentifier: 'com.notesmt.app',
     },
     android: {
       config: {
         googleMaps: {
-          apiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_MOBILE_KEY,
+          apiKey: process.env.GOOGLE_MAPS_MOBILE_KEY,
         },
       },
       package: 'com.notesmt.app',
