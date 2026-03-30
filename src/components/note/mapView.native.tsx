@@ -5,6 +5,7 @@ import { StyleSheet, View, Dimensions, Platform } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { useLocation } from '@/src/hooks/locationHook';
 import { useRouter } from 'expo-router';
+import { abstractStyleMobile } from './styles/map.styles';
 
 interface MapViewProps {
   notes: Note[];
@@ -32,6 +33,7 @@ const MapViewScene: React.FC<MapViewProps> = ({ notes, loading }) => {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
+        customMapStyle={abstractStyleMobile}
       >
         {notes.map((note) => (
           <Marker

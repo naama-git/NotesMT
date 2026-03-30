@@ -5,7 +5,7 @@ import { useLocation } from '@/src/hooks/locationHook';
 import { Note } from '@/src/models/note';
 import { useRouter } from 'expo-router';
 import { Text } from 'react-native-paper';
-import { abstractMapStyle } from './styles/map.styles';
+import { abstractMapStyleWeb } from './styles/map.styles';
 
 interface MapViewSceneProps {
   notes: Note[];
@@ -46,7 +46,7 @@ const MapViewScene: React.FC<MapViewSceneProps> = ({ notes, loading }) => {
           }}
           zoom={12}
           options={{
-            styles: abstractMapStyle,
+            styles: abstractMapStyleWeb,
             disableDefaultUI: true,
             zoomControl: true,
             gestureHandling: 'greedy',
