@@ -3,7 +3,6 @@ import { Note, NoteInput } from '@/src/models/note';
 import { noteService } from '@/src/services/noteService';
 import React, { useEffect } from 'react';
 import NoteForm from '@/src/components/note/noteForm';
-import { useRoutePath } from '@react-navigation/native';
 
 const EditNote = () => {
   const { id } = useLocalSearchParams();

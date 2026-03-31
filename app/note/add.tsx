@@ -38,7 +38,7 @@ const AddNote = () => {
     }
   };
   return (
-    <View>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <NoteForm onSubmit={add} note={null} />
     </View>
   );

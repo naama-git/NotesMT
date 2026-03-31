@@ -17,7 +17,7 @@ const AddButton = () => {
           right: 0,
           backgroundColor: theme.colors.secondary,
         }}
-        onPress={() => router.push('/note/addNote')}
+        onPress={() => router.push('/note/add')}
       />
     </View>
   );
