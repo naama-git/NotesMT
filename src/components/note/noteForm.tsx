@@ -9,6 +9,12 @@ interface NoteFormProps {
   onSubmit: (note: NoteInput) => Promise<void>;
   note: Note | null;
 }
+const formatDate = (date: Date): string => {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}.${month}.${year}`;
+};
 
 const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
   const theme = useTheme();
@@ -17,6 +23,9 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
     createdAt: note ? new Date(note.createdAt) : new Date(),
     body: note?.body ?? '',
   });
+  const [dateText, setDateText] = useState(
+    note ? formatDate(new Date(note.createdAt)) : formatDate(new Date()),
+  );
 
   useEffect(() => {
     const initialDate = note ? new Date(note.createdAt) : new Date();
@@ -25,14 +34,8 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
       createdAt: initialDate,
       body: note?.body ?? '',
     });
-    setDateText(initialDate.toLocaleDateString('he-IL'));
+    setDateText(formatDate(initialDate));
   }, [note]);
-
-  const [dateText, setDateText] = useState(
-    note
-      ? new Date(note.createdAt).toLocaleDateString('he-IL')
-      : new Date().toLocaleDateString('he-IL'),
-  );
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -76,8 +79,7 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
                 value={dateText}
                 onChangeText={(val) => {
                   setDateText(val);
-
-                  if (val.length >= 9) {
+                  if (val.length === 10) {
                     const [day, month, year] = val.split('.').map(Number);
                     const newDate = new Date(year, month - 1, day);
                     if (!isNaN(newDate.getTime())) {
