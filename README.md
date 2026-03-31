@@ -1,83 +1,65 @@
-# Welcome to your Expo app 👋
+# NotesMT - Location-Based Notes App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross-platform mobile and web application built with React Native and Expo. NotesMT allows users to create, manage, and visualize notes on an interactive map, featuring real-time synchronization with Firebase.
 
-## Get started
+## Features
+- User Authentication: Secure Sign-Up and Login via Firebase Auth.
 
-1. Install dependencies
+- Interactive Map: View and add notes based on geographic locations.
 
-   ```bash
-   npm install
+- Real-Time Sync: Instant updates across the app using Firebase Firestore onSnapshot.
+
+- Cross-Platform: Optimized for both iOS/Android (Native) and Web.
+
+## Tech Stack
+- Framework: React Native & Expo SDK (TypeScript) 
+
+- Database: Cloud Firestore (NoSQL DB) 
+
+- Authentication: Firebase SDK 
+
+- Maps: Google maps 
+
+- Navigation: Expo-router 
+
+- UI Library: React Native Paper
+
+## Architecture Decisions
+
+- ### Separation of Concerns (Service Layer)
+   All Firebase logic is encapsulato launch the app in Expo Goed within the **/services** directory. This ensures that UI components remain "dumb" and focused only on rendering, while data fetching and business logic are handled independently.
+
+- ### Real-Time Data Flow (Custom Hooks)
+   The app utilizes a useNotes custom hook that implements Firebase's onSnapshot listener. This provides a Single Source of Truth, ensuring that the Map View and List View are always in sync without redundant API calls.
+
+- ### Platform-Specific Map Implementation
+   Due to library limitations between Mobile and Web, the project uses Platform-Specific Extensions (`map.native.tsx` and `map.web.tsx`). This allows the app to use the Google Maps SDK on mobile and the Google Maps JS API on the web seamlessly
+
+## Getting Started
+### Prerequisites
+- Node.js
+
+### Installation
+1. Clone the repository:
+
+   ```
+   $ git clone https://github.com/naama-git/NotesMT.git
    ```
 
-2. Start the app
+2. Install Dependencies:
 
-   ```bash
-   npx expo start
    ```
+   $ npm install
+   ```
+3. Start the development server:
 
-In the output, you'll find options to open the app in a
+   ```
+   $ npx expo start
+   ```
+   then press `w` for WEB or `a` for android.
+   You can also scan the QR code generated in your terminal to o launch the app in Expo Go in your mobile.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+--- 
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-
-```
-/
-├── app/                        # Expo Router: Routing & Screen Orchestration
-│   │                           # Contains logic for data fetching and navigation only.
-│   ├── (auth)/                 # Authentication Flow (Stack)
-│   │   ├── _layout.tsx         # Auth guard and stack configuration
-│   │   ├── login.tsx           # Login screen - Connects UI to AuthService
-│   │   └── signup.tsx          # Signup screen - Handles multi-step registration
-│   ├── (tabs)/                 # Main Application Flow (Bottom Tabs)
-│   │   ├── _layout.tsx         # Tab bar configuration & Icon definitions
-│   │   ├── index.tsx           # Map Screen - Primary view for note locations
-│   │   ├── list.tsx            # Notes List - Overview of all user entries
-│   │   └── profile.tsx         # User Profile & Settings
-│   ├── note/                   # Dynamic Route Group for Note actions
-│   │   ├── [id].tsx            # View/Edit specific note details
-│   │   └── addNote.tsx         # New note creation screen
-│   └── _layout.tsx             # Root Layout - Global Providers (Auth, Paper, Context)
-│
-├── src/                        # Core Application Source Code
-│   ├── components/             # Reusable UI Components (Presentational)
-│   │                           # Atomic elements: AuthForm, CustomButton, NoteCard, etc.
-│   ├── context/                # Global State Management
-│   │                           # AuthContext: Maintains real-time user session state.
-│   ├── hooks/                  # Custom React Hooks (Reusable Logic)
-│   │                           # useNotes: Abstraction for Firebase real-time listeners.
-│   ├── services/               # Infrastructure Layer (External API/SDK)
-│   │                           # Firebase SDK wrappers: AuthService, NoteService.
-│   ├── models/                 # TypeScript Types & Interfaces
-│   │                           # Defines data structures: User, Note, Location.
-│   └── styles/                 # Theme & Visual Configuration
-│                               # RN Paper theme, global colors, and typography.
-```
+<img src="./assets//images/mapView.png" width="300" alt="Map View">
+<img src="./assets//images/listView.png" width="300" alt="List View">
