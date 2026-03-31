@@ -1,6 +1,5 @@
 import 'dotenv/config';
 
-console.log('ENV TEST:', process.env.EXPO_PUBLIC_GOOGLE_MAPS_WEB_KEY);
 export default {
   expo: {
     name: 'NotesMT',
@@ -12,14 +11,14 @@ export default {
     ios: {
       supportsTablet: true,
       config: {
-        googleMapsApiKey: process.env.GOOGLE_MAPS_MOBILE_KEY,
+        googleMapsApiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_MOBILE_KEY,
       },
       bundleIdentifier: 'com.notesmt.app',
     },
     android: {
       config: {
         googleMaps: {
-          apiKey: process.env.GOOGLE_MAPS_MOBILE_KEY,
+          apiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_MOBILE_KEY,
         },
       },
       package: 'com.notesmt.app',
@@ -68,6 +67,9 @@ export default {
     },
     extra: {
       googleMapsApiKeyWeb: process.env.EXPO_PUBLIC_GOOGLE_MAPS_WEB_KEY,
+      eas: {
+        projectId: '4c5b5f10-ec8c-42c7-81d9-f22948976446',
+      },
     },
   },
 };

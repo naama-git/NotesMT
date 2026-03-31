@@ -1,6 +1,6 @@
 import { Note } from '@/src/models/note';
 import React from 'react';
-import { Text } from 'react-native-paper';
+import { Text, ActivityIndicator } from 'react-native-paper';
 import { StyleSheet, View, Dimensions, Platform } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { useLocation } from '@/src/hooks/locationHook';
@@ -17,13 +17,13 @@ const MapViewScene: React.FC<MapViewProps> = ({ notes, loading }) => {
   const router = useRouter();
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Map View</Text>
-      {Platform.OS === 'web' && (
-        <Text style={{ color: 'red', marginBottom: 10 }}>
-          Map view is not supported on web platform.
-        </Text>
+      {loading && (
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <ActivityIndicator size="large" />
+        </View>
       )}
-
       <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.map}
@@ -35,7 +35,7 @@ const MapViewScene: React.FC<MapViewProps> = ({ notes, loading }) => {
         }}
         customMapStyle={abstractStyleMobile}
       >
-        {notes.map((note) => (
+        {notes?.map((note) => (
           <Marker
             onPress={() => router.push(`/note/${note.id}`)}
             key={note.id}

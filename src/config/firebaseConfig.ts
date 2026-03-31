@@ -7,7 +7,7 @@ import { getAuth } from 'firebase/auth';
 import { initializeFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDJsj-iCvRQs8HmzI_sdvVMeav0pBG9U-A',
+  apiKey: process.env.EXPO_PUBLIC_FIRESTORE_API_KEY,
   authDomain: 'notesmt.firebaseapp.com',
   projectId: 'notesmt',
   storageBucket: 'notesmt.firebasestorage.app',
