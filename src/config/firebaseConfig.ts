@@ -1,10 +1,12 @@
-// NOTE: Firebase config is intentionally exposed for testing purposes.
-// In a production environment, these would be stored in environment variables.
-// Security is handled via Firebase Security Rules.
-
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getApp, getApps, initializeApp } from 'firebase/app';
 import { initializeFirestore } from 'firebase/firestore';
+import {
+  initializeAuth,
+  getReactNativePersistence,
+  getAuth,
+} from 'firebase/auth';
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
 
 const firebaseConfig = {
   apiKey: process.env.EXPO_PUBLIC_FIRESTORE_API_KEY,
@@ -17,9 +19,17 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
-export const auth = getAuth(app);
+export const auth = (() => {
+  if (Platform.OS === 'web') {
+    return getAuth(app);
+  } else {
+    return initializeAuth(app, {
+      persistence: getReactNativePersistence(ReactNativeAsyncStorage),
+    });
+  }
+})();
 
 export const db = initializeFirestore(app, {
   experimentalForceLongPolling: true,

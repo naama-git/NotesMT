@@ -17,36 +17,43 @@ const MapViewScene: React.FC<MapViewProps> = ({ notes, loading }) => {
   const router = useRouter();
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      {loading && (
+      {!loading && notes.length === 0 ? (
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <Text>You don&apos;t have any notes yet.</Text>
+        </View>
+      ) : loading ? (
         <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
           <ActivityIndicator size="large" />
         </View>
+      ) : (
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={styles.map}
+          initialRegion={{
+            latitude: location ? location.coords.latitude : 32.0853,
+            longitude: location ? location.coords.longitude : 34.7818,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+          customMapStyle={abstractStyleMobile}
+        >
+          {notes?.map((note) => (
+            <Marker
+              onPress={() => router.push(`/note/${note.id}`)}
+              key={note.id}
+              coordinate={{
+                latitude: note.location.latitude,
+                longitude: note.location.longitude,
+              }}
+              title={note.title}
+            />
+          ))}
+        </MapView>
       )}
-      <MapView
-        provider={PROVIDER_GOOGLE}
-        style={styles.map}
-        initialRegion={{
-          latitude: location ? location.coords.latitude : 32.0853,
-          longitude: location ? location.coords.longitude : 34.7818,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-        customMapStyle={abstractStyleMobile}
-      >
-        {notes?.map((note) => (
-          <Marker
-            onPress={() => router.push(`/note/${note.id}`)}
-            key={note.id}
-            coordinate={{
-              latitude: note.location.latitude,
-              longitude: note.location.longitude,
-            }}
-            title={note.title}
-          />
-        ))}
-      </MapView>
     </View>
   );
 };

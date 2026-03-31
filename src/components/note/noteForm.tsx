@@ -19,17 +19,19 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
   });
 
   useEffect(() => {
+    const initialDate = note ? new Date(note.createdAt) : new Date();
     setForm({
-      title: note?.title ? note?.title : '',
-      createdAt: note ? new Date(note.createdAt) : new Date(),
+      title: note?.title ?? '',
+      createdAt: initialDate,
       body: note?.body ?? '',
     });
+    setDateText(initialDate.toLocaleDateString('he-IL'));
   }, [note]);
 
   const [dateText, setDateText] = useState(
-    form.createdAt instanceof Date
-      ? form.createdAt.toLocaleDateString('he-IL')
-      : '',
+    note
+      ? new Date(note.createdAt).toLocaleDateString('he-IL')
+      : new Date().toLocaleDateString('he-IL'),
   );
 
   return (
@@ -110,7 +112,7 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
                   alignItems: 'center',
                 }}
               >
-                <DeleteNote note={note} />
+                {note && <DeleteNote note={note} />}
                 <Button
                   mode="contained"
                   onPress={() => onSubmit(form)}

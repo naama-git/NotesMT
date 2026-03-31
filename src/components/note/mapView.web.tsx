@@ -12,7 +12,6 @@ interface MapViewSceneProps {
   loading: boolean;
 }
 const MapViewScene: React.FC<MapViewSceneProps> = ({ notes, loading }) => {
-  console.log('api', process.env.EXPO_PUBLIC_GOOGLE_MAPS_WEB_KEY);
   const googleMapsKey = process.env.EXPO_PUBLIC_GOOGLE_MAPS_WEB_KEY || '';
 
   const { location } = useLocation();
@@ -31,7 +30,13 @@ const MapViewScene: React.FC<MapViewSceneProps> = ({ notes, loading }) => {
   }
   return (
     <View style={{ flex: 1, height: '100%', width: '100%' }}>
-      {!isLoaded || loading ? (
+      {!loading && notes.length === 0 ? (
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <Text>You don&apos;t have any notes yet.</Text>
+        </View>
+      ) : !isLoaded || loading ? (
         <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >

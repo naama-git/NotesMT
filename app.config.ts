@@ -4,6 +4,7 @@ export default {
   expo: {
     name: 'NotesMT',
     slug: 'NotesMT',
+    owner: 'naama-expo',
     version: '1.0.0',
     orientation: 'portrait',
     scheme: 'notesmt',
@@ -70,6 +71,12 @@ export default {
       eas: {
         projectId: '4c5b5f10-ec8c-42c7-81d9-f22948976446',
       },
+    },
+    updates: {
+      url: 'https://u.expo.dev/4c5b5f10-ec8c-42c7-81d9-f22948976446',
+    },
+    runtimeVersion: {
+      policy: 'appVersion',
     },
   },
 };
