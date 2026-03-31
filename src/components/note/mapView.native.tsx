@@ -1,7 +1,7 @@
 import { Note } from '@/src/models/note';
 import React from 'react';
 import { Text, ActivityIndicator } from 'react-native-paper';
-import { StyleSheet, View, Dimensions, Platform } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { useLocation } from '@/src/hooks/locationHook';
 import { useRouter } from 'expo-router';
