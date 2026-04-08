@@ -4,17 +4,12 @@ import { styles } from './styles/form.styles';
 import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { Button, Surface, useTheme, TextInput, Text } from 'react-native-paper';
 import DeleteNote from './deleteNote';
+import DateTimePicker from './DateTimePicker';
 
 interface NoteFormProps {
   onSubmit: (note: NoteInput) => Promise<void>;
   note: Note | null;
 }
-const formatDate = (date: Date): string => {
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = date.getFullYear();
-  return `${day}.${month}.${year}`;
-};
 
 const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
   const theme = useTheme();
@@ -23,9 +18,6 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
     createdAt: note ? new Date(note.createdAt) : new Date(),
     body: note?.body ?? '',
   });
-  const [dateText, setDateText] = useState(
-    note ? formatDate(new Date(note.createdAt)) : formatDate(new Date()),
-  );
 
   useEffect(() => {
     const initialDate = note ? new Date(note.createdAt) : new Date();
@@ -34,8 +26,16 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
       createdAt: initialDate,
       body: note?.body ?? '',
     });
-    setDateText(formatDate(initialDate));
   }, [note]);
+
+  const [open, setOpen] = useState<boolean>(false);
+  const setFormDate = (rawDate: any) => {
+    const date = new Date(rawDate);
+    setForm({
+      ...form,
+      createdAt: date,
+    });
+  };
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -73,28 +73,25 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
                 outlineStyle={{ borderRadius: 12 }}
                 style={styles.inputBackground}
               />
-              <TextInput
-                label="Date"
-                mode="outlined"
-                value={dateText}
-                onChangeText={(val) => {
-                  setDateText(val);
-                  if (val.length === 10) {
-                    const [day, month, year] = val.split('.').map(Number);
-                    const newDate = new Date(year, month - 1, day);
-                    if (!isNaN(newDate.getTime())) {
-                      setForm({ ...form, createdAt: newDate });
-                    } else {
-                      setForm({ ...form, createdAt: new Date() });
-                    }
-                  }
-                }}
-                left={<TextInput.Icon icon="calendar-outline" />}
-                outlineStyle={{ borderRadius: 12 }}
-                style={styles.inputBackground}
-                placeholder="DD/MM/YYYY"
-                maxLength={10}
-                keyboardType="numeric"
+              <View>
+                <TextInput
+                  label="Date"
+                  mode="outlined"
+                  value={form.createdAt.toDateString()}
+                  left={<TextInput.Icon icon="calendar-outline" />}
+                  outlineStyle={{ borderRadius: 12 }}
+                  style={styles.inputBackground}
+                  placeholder="DD/MM/YYYY"
+                  readOnly
+                />
+                <Button onPress={() => setOpen(true)} uppercase={false}>
+                  Pick date
+                </Button>
+              </View>
+              <DateTimePicker
+                open={open}
+                setOpen={setOpen}
+                setFormDate={setFormDate}
               />
               <TextInput
                 label="Content"
