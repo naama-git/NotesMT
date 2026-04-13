@@ -38,10 +38,10 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flex: 1, alignItems: 'center' }}>
       <KeyboardAvoidingView
         style={{ flex: 1, backgroundColor: theme.colors.background }}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        behavior={Platform.OS === 'ios' ? 'height' : undefined}
       >
         <ScrollView
           contentContainerStyle={styles.scrollContent}
@@ -77,7 +77,7 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, note }) => {
                 <TextInput
                   label="Date"
                   mode="outlined"
-                  value={form.createdAt.toDateString()}
+                  value={form.createdAt.toLocaleDateString()}
                   left={<TextInput.Icon icon="calendar-outline" />}
                   outlineStyle={{ borderRadius: 12 }}
                   style={styles.inputBackground}

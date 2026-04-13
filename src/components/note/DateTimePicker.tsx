@@ -1,17 +1,25 @@
 import React from 'react';
 import { View } from 'react-native';
-import { DatePickerModal } from 'react-native-paper-dates';
+import {
+  DatePickerModal,
+  he,
+  registerTranslation,
+} from 'react-native-paper-dates';
+
+registerTranslation('he', he);
+
 interface DateTimePickerProps {
   setFormDate: (date: any) => void;
   open: boolean;
   setOpen: (params: boolean) => void;
 }
+
 const DateTimePicker: React.FC<DateTimePickerProps> = ({
   setFormDate,
   open,
   setOpen,
 }) => {
-  const [date, setDate] = React.useState(undefined);
+  const [date, setDate] = React.useState<Date | undefined>(undefined);
   const onDismissSingle = React.useCallback(() => {
     setOpen(false);
   }, [setOpen]);
@@ -26,7 +34,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   );
 
   return (
-    <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center' }}>
+    <View>
       <DatePickerModal
         locale="he"
         mode="single"

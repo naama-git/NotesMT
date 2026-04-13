@@ -5,6 +5,7 @@ import { View, ActivityIndicator } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import { theme } from '@/src/styles/theme';
 import CustomHeader from '@/src/components/home/CustomHeader';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 function RootLayoutNav() {
   const { user, loading } = useAuth();
@@ -64,7 +65,9 @@ export default function RootLayout() {
   return (
     <AuthProvider>
       <PaperProvider theme={theme}>
-        <RootLayoutNav />
+        <SafeAreaProvider>
+          <RootLayoutNav />
+        </SafeAreaProvider>
       </PaperProvider>
     </AuthProvider>
   );
