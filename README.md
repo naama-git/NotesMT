@@ -18,7 +18,7 @@ A cross-platform mobile and web application built with React Native and Expo. No
 
 - Authentication: Firebase SDK 
 
-- Maps: Google maps 
+- Maps: Google Maps 
 
 - Navigation: Expo-router 
 
@@ -38,7 +38,7 @@ A cross-platform mobile and web application built with React Native and Expo. No
 ## Getting Started
 ### Prerequisites
 - Node.js
-- - Copy the contents of [example.env](./example.env) to a new file named appsettings.json and fill in the details.
+- Copy the contents of [example.env](./example.env) to a new file named appsettings.json and fill in the details.
 
 ### Installation
 1. Clone the repository:
