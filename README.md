@@ -62,4 +62,9 @@ A cross-platform mobile and web application built with React Native and Expo. No
 
 --- 
 
-<img src="./assets//images/mapView.png" width="300" alt="Map View"> <img src="./assets//images/listView.png" width="300" alt="List View">
+<p align="left">
+  <img src="./assets/images/map.png" width="200" alt="Map View">
+  <img src="./assets/images/list.png" width="200" alt="List View">
+  <img src="./assets/images/login.png" width="200" alt="Login View">
+  <img src="./assets/images/note.png" width="200" alt="Note View">
+</p>
